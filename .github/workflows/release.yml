@@ -34,7 +34,7 @@ jobs:
       - name: get the new tag
         id: new_tag
         run: echo "tag=v${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
       - name: get last tag information
@@ -52,17 +52,17 @@ jobs:
       contents: read
     steps:
       - name: Generate full changelog for repository
-        uses: charmixer/auto-changelog-action@v1
+        uses: charmixer/auto-changelog-action@dc40535ee3847b9aa975481644d187761d2ebc53 # v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           future_release: ${{ needs.version-info.outputs.new_tag }}
           exclude_labels: duplicate,question,invalid,wontfix,release
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4
         with:
           name: CHANGELOG.md
           path: CHANGELOG.md
       - name: Generate changelog with release information only
-        uses: charmixer/auto-changelog-action@v1
+        uses: charmixer/auto-changelog-action@dc40535ee3847b9aa975481644d187761d2ebc53 # v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           future_release: ${{ needs.version-info.outputs.new_tag }}
@@ -90,8 +90,8 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.BOT_PAT }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e # v4
         with:
           name: CHANGELOG.md
       - name: Update metadata with new version
@@ -116,7 +116,7 @@ jobs:
           url=$(gh pr create -b "${{ needs.generate-changelog.outputs.release_changelog }}" -t "Release ${{ needs.version-info.outputs.new_tag }}" -l release | grep -F 'https://github.com' )
           gh pr merge $url --auto -m
       - name: create a new release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@26994186c0ac3ef5cae75ac16aa32e8153525f77 # v1
         with:
           tag_name: ${{ needs.version-info.outputs.new_tag }}
           body: ${{ needs.generate-changelog.outputs.release_changelog }}
@@ -128,7 +128,7 @@ jobs:
       - version-info
       - release-pull-request
     steps:
-      - uses: actions/cache@v3
+      - uses: actions/cache@734d9cb93d6f7610c2400b0f789eaa6f9813e271 # v3
         with:
           path: |
             .cache
@@ -153,7 +153,7 @@ jobs:
           ${{ secrets.SUPERMARKET_KEY }}
           EOF
       - name: checkout cookbook
-        uses: actions/checkout@v4
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           path: cookbooks/${{ env.cookbook_name }}
           ref: ${{ needs.version-info.outputs.new_tag }}

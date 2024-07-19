@@ -16,8 +16,8 @@ jobs:
   cookstyle:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v3
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/cache@734d9cb93d6f7610c2400b0f789eaa6f9813e271 # v3
         with:
           path: |
             .cache
@@ -56,8 +56,8 @@ jobs:
 #          - opensuse-42 # something is broken here
           - ubuntu-20-04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v3
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/cache@734d9cb93d6f7610c2400b0f789eaa6f9813e271 # v3
         with:
           path: |
             .cache
@@ -94,8 +94,8 @@ jobs:
           - default-debian-10
           - default-debian-11
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v3
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/cache@734d9cb93d6f7610c2400b0f789eaa6f9813e271 # v3
         with:
           path: |
             .cache
